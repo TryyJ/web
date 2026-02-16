@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARC Gaming Community</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* Basic reset and typography */
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"JetBrains Mono",monospace;background:#0e0e23;color:#00ff9e;overflow-x:hidden}
+  h1{font-size:3rem;text-align:center;margin:.5em 0}
+  p{font-size:1.1rem;text-align:center;margin:.8em 0}
+  
+  /* Neon container */
+  .neon{border:2px solid #00ff9e;padding:2rem;border-radius:8px;box-shadow:0 0 20px rgba(0,255,158,.3)}
+  
+  /* Glitch effect */
+  .neon::before,
+  .neon::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;
+    top:0;bottom:0;
+    background-clip:text;
+    mask:linear-gradient(transparent,#000);
+    /* Make sure the text is in the center */
+    text-align:center;
+    font-weight:600;
+  }
+  .neon::before{animation:glitch 1s infinite linear alternate}
+  .neon::after{animation:glitch 1.5s infinite linear alternate}
+
+  @keyframes glitch{
+    0%{clip-path:rect(0,100%,0,0);transform:translate(0,-2px)}
+    20%{clip-path:rect(80px,100%,35px,0);transform:translate(2px,0)}
+    40%{clip-path:rect(50px,100%,80px,0);transform:translate(-2px,1px)}
+    60%{clip-path:rect(110px,100%,120px,0);transform:translate(0,-1px)}
+    80%{clip-path:rect(30px,100%,70px,0);transform:translate(1px,0)}
+    100%{clip-path:rect(0,100%,0,0);transform:translate(0,0)}
+  }
+  
+  /* Button */
+  a.btn{
+    display:inline-block;background:#00ff9e;color:#0e0e23;
+    padding:.8rem 1.5rem;border-radius:4px;margin-top:1rem;
+    text-decoration:none;font-weight:bold;text-align:center;
+    transition:0.3s ease;
+  }
+  a.btn:hover{transform:scale(1.05);box-shadow:0 0 15px #00ff9e}
+  
+  @media(max-width:600px){
+    h1{font-size:2rem}
+  }
+</style>
+</head>
+<body>
+  <div class="neon" style="position:relative;display:flex;flex-direction:column;align-items:center;height:100vh;justify-content:center;">
+    <h1>Hello ARC Gaming Community</h1>
+    <p>Welcome to the future of esports. Dive in.</p>
+    <a href="/games" class="btn">Explore Games</a>
+  </div>
+</body>
+</html>
