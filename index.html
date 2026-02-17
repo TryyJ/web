@@ -5,72 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ARC COD-Elite Gaming Community</title>
   
-  <!-- Google Fonts: JetBrains Mono -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
   
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
+    
     body {
       font-family: "JetBrains Mono", monospace;
       background: #0a0a0a;
       color: #ff1122;
       min-height: 100vh;
       overflow-x: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    .neon {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      width: 90%;
-      max-width: 800px;
-      padding: 3rem 1.5rem;
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.9);
+      border-bottom: 2px solid #ff1122;
+      padding: 1rem;
+      text-align: center;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(255,17,34,0.3);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 15px #ff1122;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin: 2rem 0 4rem;
+    }
+
+    .hero .neon {
+      display: inline-block;
+      padding: 2rem 3rem;
       border: 3px solid #ff1122;
       border-radius: 12px;
-      box-shadow: 
-        0 0 20px rgba(255, 17, 34, 0.4),
-        inset 0 0 30px rgba(255, 17, 34, 0.15);
-      background: rgba(10, 10, 10, 0.7);
-      backdrop-filter: blur(4px);
-      transition: all 0.4s ease;
+      box-shadow: 0 0 30px rgba(255,17,34,0.5);
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(5px);
+      transition: all 0.4s;
     }
 
-    .neon:hover {
-      box-shadow: 
-        0 0 40px rgba(255, 17, 34, 0.7),
-        inset 0 0 50px rgba(255, 17, 34, 0.25);
-      transform: scale(1.02);
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      text-align: center;
-      letter-spacing: 4px;
-      text-shadow: 0 0 20px #ff1122, 0 0 40px #ff1122;
-      margin-bottom: 1rem;
-      white-space: nowrap;
-    }
-
-    p {
-      font-size: 1.3rem;
-      text-align: center;
-      opacity: 0.9;
-      margin-bottom: 2.5rem;
-      max-width: 600px;
+    .hero .neon:hover {
+      box-shadow: 0 0 50px rgba(255,17,34,0.8);
+      transform: scale(1.03);
     }
 
     .btn {
@@ -82,62 +74,94 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 1.2rem;
-      letter-spacing: 2px;
-      box-shadow: 0 0 25px rgba(255, 17, 34, 0.6);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
+      margin: 1.5rem 0.5rem;
+      box-shadow: 0 0 25px rgba(255,17,34,0.6);
+      transition: all 0.3s;
     }
 
-    .btn:hover {
-      transform: translateY(-4px) scale(1.08);
-      box-shadow: 0 0 45px rgba(255, 17, 34, 0.9);
-      background: #ff3344;
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 0 45px #ff1122; }
+
+    section.meta {
+      margin: 4rem 0;
     }
 
-    .btn:active {
-      transform: translateY(2px) scale(0.98);
+    .meta h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 15px #ff1122;
     }
 
-    @media (max-width: 640px) {
-      h1 { font-size: 2.4rem; }
-      p  { font-size: 1.1rem; }
-      .btn { padding: 0.9rem 2rem; font-size: 1.1rem; }
-      .neon { padding: 2rem 1rem; }
+    .loadout-card {
+      background: rgba(20,20,20,0.8);
+      border: 2px solid #ff1122;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 0 20px rgba(255,17,34,0.3);
     }
 
-    /* Optional glitch animation (controlled via JS) */
-    .glitch-active::before,
-    .glitch-active::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #0a0a0a;
-      color: #ff1122;
-      clip-path: rect(0, 0, 0, 0);
-      animation: glitch 1s infinite linear alternate;
-    }
+    .loadout-card h3 { color: #ff3344; margin-bottom: 1rem; }
 
-    @keyframes glitch {
-      0%   { clip-path: inset(0 0 0 0); transform: translate(0); }
-      10%  { clip-path: inset(2% 0 8% 0); transform: translate(-2px, 2px); }
-      20%  { clip-path: inset(5% 0 3% 0); transform: translate(2px, -2px); }
-      30%  { clip-path: inset(1% 0 9% 0); transform: translate(-1px, 1px); }
-      100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    ul { list-style: none; padding-left: 1.5rem; }
+
+    li:before { content: "→ "; color: #ff1122; }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.8rem; }
+      .hero .neon { padding: 1.5rem 2rem; }
     }
   </style>
 </head>
 <body>
-  <div class="neon" data-text="ARC COD-Elite Community">
+  <header>
     <h1>ARC COD-Elite Community</h1>
-    <p id="tagline">Join the ultimate Call-of-Duty battleground!</p>
-    <a href="/games" class="btn" id="arena-btn">Start the Arena</a>
-  </div>
+  </header>
 
-  <!-- JavaScript -->
+  <main>
+    <section class="hero">
+      <div class="neon">
+        <h2>Welcome to the Elite Battleground</h2>
+        <p id="tagline">Join the ultimate Call-of-Duty ranked arena!</p>
+        <a href="/classes.html" class="btn">View Current Meta Classes</a>
+        <a href="/games.html" class="btn">Games & Maps</a>
+      </div>
+    </section>
+
+    <section class="meta">
+      <h2>BO7 Ranked Play Meta Classes (Feb 2026)</h2>
+      <p style="text-align:center; opacity:0.8; margin-bottom:2rem;">CDL-restricted meta – only a few guns dominate high-level play. Updated from pro sources & trackers.</p>
+
+      <div class="loadout-card">
+        <h3>1. M15 Mod 0 (Best AR – Versatile / Lane Control)</h3>
+        <p>Pick Rate: ~27-30% in ranked. Pro staple for mid-long range.</p>
+        <ul>
+          <li>Optics: Lethal Tools ELO or Kepler Microflex</li>
+          <li>Barrel: 16.5” Fusion / Reinforced Barrel</li>
+          <li>Rear Grip: Peregrine / Ergonomic Grip</li>
+          <li>Stock: Wander 3V / Infiltrator Stock</li>
+          <li>Fire Mods: Buffer Spring / Recoil Springs</li>
+        </ul>
+        <p><em>Loadout Code Example:</em> A01-21WSG-MJ5UL-KB11 (or similar pro variants). Low recoil, great for holding hills/spawns.</p>
+      </div>
+
+      <div class="loadout-card">
+        <h3>2. Dravec 45 / Sturmwolf 45 (Top SMG – Aggro Rush)</h3>
+        <p>Pick Rate: ~9-28% (aggressive close-range king).</p>
+        <ul>
+          <li>Optic: Kepler Microflex (if allowed)</li>
+          <li>Barrel: Long / Reinforced</li>
+          <li>Rear Grip: Quickdraw / Ergonomic</li>
+          <li>Magazine: Fast Mag II</li>
+          <li>Underbarrel: Vertical Foregrip</li>
+        </ul>
+        <p><em>Loadout Code Example:</em> S07-D46TJ-111 or S04-CWWDU-H11. High mobility, fast TTK up close – pair with movement perks.</p>
+      </div>
+
+      <p style="text-align:center; font-size:0.9rem; opacity:0.7;">Meta shifts with patches (e.g., Season 2 tuning on recoil/attachments). Check CDL rules & trackers like wzstats.gg or warzoneloadout.games for latest. Last updated: Feb 16, 2026.</p>
+    </section>
+  </main>
+
   <script src="script.js" defer></script>
 </body>
 </html>
