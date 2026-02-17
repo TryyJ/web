@@ -1,24 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ARC COD-Elite Gaming Community</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Fonts: JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
   <style>
-    /* Your existing CSS – looks solid! I just added font import above for JetBrains Mono */
-    /* ... your styles ... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "JetBrains Mono", monospace;
+      background: #0a0a0a;
+      color: #ff1122;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .neon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 90%;
+      max-width: 800px;
+      padding: 3rem 1.5rem;
+      border: 3px solid #ff1122;
+      border-radius: 12px;
+      box-shadow: 
+        0 0 20px rgba(255, 17, 34, 0.4),
+        inset 0 0 30px rgba(255, 17, 34, 0.15);
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(4px);
+      transition: all 0.4s ease;
+    }
+
+    .neon:hover {
+      box-shadow: 
+        0 0 40px rgba(255, 17, 34, 0.7),
+        inset 0 0 50px rgba(255, 17, 34, 0.25);
+      transform: scale(1.02);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px #ff1122, 0 0 40px #ff1122;
+      margin-bottom: 1rem;
+      white-space: nowrap;
+    }
+
+    p {
+      font-size: 1.3rem;
+      text-align: center;
+      opacity: 0.9;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff1122;
+      color: #0e0e0e;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      box-shadow: 0 0 25px rgba(255, 17, 34, 0.6);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 0 45px rgba(255, 17, 34, 0.9);
+      background: #ff3344;
+    }
+
+    .btn:active {
+      transform: translateY(2px) scale(0.98);
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.4rem; }
+      p  { font-size: 1.1rem; }
+      .btn { padding: 0.9rem 2rem; font-size: 1.1rem; }
+      .neon { padding: 2rem 1rem; }
+    }
+
+    /* Optional glitch animation (controlled via JS) */
+    .glitch-active::before,
+    .glitch-active::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      color: #ff1122;
+      clip-path: rect(0, 0, 0, 0);
+      animation: glitch 1s infinite linear alternate;
+    }
+
+    @keyframes glitch {
+      0%   { clip-path: inset(0 0 0 0); transform: translate(0); }
+      10%  { clip-path: inset(2% 0 8% 0); transform: translate(-2px, 2px); }
+      20%  { clip-path: inset(5% 0 3% 0); transform: translate(2px, -2px); }
+      30%  { clip-path: inset(1% 0 9% 0); transform: translate(-1px, 1px); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    }
   </style>
 </head>
 <body>
-  <div class="neon">
+  <div class="neon" data-text="ARC COD-Elite Community">
     <h1>ARC COD-Elite Community</h1>
-    <p>Join the ultimate Call-of-Duty battleground!</p>
-    <a href="/games" class="btn">Start the Arena</a>
+    <p id="tagline">Join the ultimate Call-of-Duty battleground!</p>
+    <a href="/games" class="btn" id="arena-btn">Start the Arena</a>
   </div>
 
+  <!-- JavaScript -->
   <script src="script.js" defer></script>
 </body>
 </html>
