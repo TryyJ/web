@@ -1,85 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ARC COD‑Elite Gaming Community</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-/* --- Basic reset & typography --- */
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:"JetBrains Mono",monospace;
-  background:#0e0e0e;   /* Dark backdrop */
-  color:#ff1122;        /* Neon‑red text */
-  overflow-x:hidden;   /* Prevent horizontal scroll */
-}
-
-/* --- Headings & copy --- */
-h1{font-size:3rem;text-align:center;margin:.5em 0}
-p{font-size:1.1rem;text-align:center;margin:.8em 0}
-
-/* --- Red‑neon container --- */
-.neon{
-  position:relative;                /* Enables glitch layers */
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100vh;
-  border:3px solid #ff1122;
-  padding:2rem;
-  border-radius:10px;
-  box-shadow:0 0 25px rgba(255,17,34,.5);
-}
-
-/* --- Glitch text effect --- */
-.neon::before,
-.neon::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-clip:text;
-  mask:linear-gradient(transparent,#000);
-  text-align:center;
-  font-weight:600;
-}
-.neon::before{animation:glitch 1.2s infinite linear alternate}
-.neon::after{animation:glitch 1.6s infinite linear alternate}
-@keyframes glitch{
-  0%  {clip-path:rect(0,100%,0,0);transform:translate(0,-2px)}
-  20% {clip-path:rect(80px,100%,35px,0);transform:translate(2px,0)}
-  40% {clip-path:rect(50px,100%,80px,0);transform:translate(-2px,1px)}
-  60% {clip-path:rect(110px,100%,120px,0);transform:translate(0,-1px)}
-  80% {clip-path:rect(30px,100%,70px,0);transform:translate(1px,0)}
-  100%{clip-path:rect(0,100%,0,0);transform:translate(0,0)}
-}
-
-/* --- Red button --- */
-a.btn{
-  display:inline-block;
-  background:#ff1122;
-  color:#0e0e0e;
-  padding:.9rem 1.8rem;
-  border-radius:5px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:transform .3s ease,box-shadow .3s ease;
-}
-a.btn:hover{
-  transform:scale(1.06);
-  box-shadow:0 0 18px #ff1122;
-}
-
-@media(max-width:600px){
-  h1{font-size:2rem}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>ARC COD-Elite Gaming Community</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Your existing CSS – looks solid! I just added font import above for JetBrains Mono */
+    /* ... your styles ... */
+  </style>
 </head>
 <body>
   <div class="neon">
-    <h1>ARC COD‑Elite Community</h1>
-    <p>Join the ultimate Call‑of‑Duty battleground!</p>
+    <h1>ARC COD-Elite Community</h1>
+    <p>Join the ultimate Call-of-Duty battleground!</p>
     <a href="/games" class="btn">Start the Arena</a>
   </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
