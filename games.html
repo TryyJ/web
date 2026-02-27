@@ -4,64 +4,82 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Maps & Modes – ARC COD-Elite</title>
-  <!-- same fonts link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Exact same CSS as index.html ── */
+    /* (copy the full <style> block from your index.html here – it's identical) */
+  </style>
 </head>
 <body>
 
-<!-- Ticker + Header same as above -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
-<div class="ticker-wrap">... same ...</div>
-
-<header>... same ...</header>
-
-<div class="page-hero">
-  <div class="page-tag">// SEASON 2 MAP POOL · FEB 2026</div>
-  <h1 class="page-title">MAPS <span class="r">& MODES</span></h1>
-  <p class="page-sub">Current ranked map pool and strategy breakdowns</p>
-</div>
-
-<div class="section">
-  <div class="maps-grid">
-
-    <div class="map-card reveal">
-      <div class="map-img-wrap">
-        <img src="blackheart.jpg" alt="Blackheart">
-        <div class="map-img-overlay"></div>
-        <div class="map-img-name">BLACKHEART</div>
-      </div>
-      <div class="map-body">
-        <p class="map-tip">Current live Hardpoint map – strong SMG presence.</p>
-      </div>
-    </div>
-
-    <div class="map-card reveal">
-      <div class="map-img-wrap">
-        <img src="colossus.jpg" alt="Colossus">
-        <div class="map-img-overlay"></div>
-        <div class="map-img-name">COLOSSUS</div>
-      </div>
-      <div class="map-body">
-        <p class="map-tip">Vantage SR shines on long lanes – S&D favorite.</p>
-      </div>
-    </div>
-
-    <div class="map-card reveal">
-      <div class="map-img-wrap">
-        <img src="den.jpg" alt="Den">
-        <div class="map-img-overlay"></div>
-        <div class="map-img-name">DEN</div>
-      </div>
-      <div class="map-body">
-        <p class="map-tip">Close-quarters chaos – Dravec / Sturmwolf dominant.</p>
-      </div>
-    </div>
-
-    <!-- Add Exposure, Scar, Raid similarly using your files -->
-
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    ★ MAP POOL ACTIVE — SEASON 2 ★ &nbsp;&nbsp;&nbsp; BLACKHEART LIVE HP ★ &nbsp;&nbsp;&nbsp; COLOSSUS S&D NEXT ★ &nbsp;&nbsp;&nbsp; DEN FAST TTK META ★ &nbsp;&nbsp;&nbsp; CHECK CDL RESTRICTIONS ★ &nbsp;&nbsp;&nbsp;
   </div>
 </div>
 
-<!-- Footer and scripts same -->
+<header>
+  <a href="index.html" class="logo">ARC<em>·</em>COD</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="classes.html">Meta Classes</a>
+    <a href="games.html" class="active">Maps & Modes</a>
+  </nav>
+  <div class="hdr-right">
+    <div id="hdr-clock">00:00:00</div>
+    <div id="hdr-date">—</div>
+  </div>
+</header>
 
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-tag">// CDL RANKED POOL · SEASON 2 · FEB 2026</div>
+  <h1 class="page-title">MAPS <span class="r">& MODES</span></h1>
+  <p class="page-sub">Full ranked map pool · Hardpoint, Overload, Search & Destroy · Pro breakdowns</p>
+</div>
+
+<div class="section">
+  <div class="sec-hdr reveal">
+    <h2>MAP POOL</h2>
+    <div class="sec-line"></div>
+    <span class="sec-tag">// CURRENT SEASON</span>
+  </div>
+
+  <!-- Your maps grid or mode tabs here – style now matches index cards -->
+  <div class="maps-strip">  <!-- or use your original .maps-grid if preferred -->
+    <div class="map-chip reveal"><div class="map-dot dot-live"></div><span class="map-emoji">🏚️</span><div class="map-name">BLACKHEART</div><div class="map-mode-lbl">Hardpoint · Live</div></div>
+    <div class="map-chip reveal"><div class="map-dot dot-next"></div><span class="map-emoji">🗿</span><div class="map-name">COLOSSUS</div><div class="map-mode-lbl">S&D · Next</div></div>
+    <!-- Add the rest of your map chips or full mode sections here -->
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="index.html" class="btn btn-ghost reveal">← Back to Home</a>
+  </div>
+</div>
+
+<div id="toast">✔ COPIED</div>
+
+<footer>
+  <div class="foot-logo">ARC · COD-ELITE</div>
+  <p>Community meta hub · BO7 Season 2 · Updated February 2026</p>
+  <p style="margin-top:0.5rem"><a href="index.html">← Home</a> · <a href="classes.html">Meta Classes →</a></p>
+</footer>
+
+<script>
+  /* Exact same script as index.html */
+  const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';});
+  function tick(){const n=new Date();document.getElementById('hdr-clock').textContent=n.toLocaleTimeString('en-GB');document.getElementById('hdr-date').textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});}
+  tick();setInterval(tick,1000);
+  const revObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(!e.isIntersecting)return;setTimeout(()=>e.target.classList.add('vis'),i*80);revObs.unobserve(e.target);});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+  const toast=document.getElementById('toast');let tt;
+  // Add copy logic if you have copy buttons on this page
+</script>
 </body>
 </html>
