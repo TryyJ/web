@@ -7,8 +7,126 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ── Exact same CSS as index.html ── */
-    /* (copy the full <style> block from your index.html here – it's identical) */
+    :root {
+      --red:#ff1122; --red-mid:#cc0d1b; --red-dim:#7a0a12;
+      --red-glow:rgba(255,17,34,0.55); --red-faint:rgba(255,17,34,0.07);
+      --bg:#060607; --bg2:#0c0c0f; --bg3:#111116;
+      --border:rgba(255,17,34,0.28);
+      --text:#ddd5d5; --text-dim:#7a6f6f;
+      --teal:#00e5cc; --gold:#ffc840;
+      --hp-color:#ff1122; --hp-glow:rgba(255,17,34,0.5);
+      --ol-color:#ffc840; --ol-glow:rgba(255,200,64,0.5);
+      --sd-color:#00e5cc; --sd-glow:rgba(0,229,204,0.5);
+      --font-head:'Orbitron',monospace; --font-mono:'Share Tech Mono',monospace; --font-body:'Rajdhani',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:crosshair;min-height:100vh;}
+    ::selection{background:var(--red);color:#000;}
+    ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--red-dim);border-radius:2px;}
+    body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);pointer-events:none;z-index:9997;}
+    #cursor{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--red),0 0 30px var(--red-glow);}
+    #cursor-ring{width:30px;height:30px;border:1px solid rgba(255,17,34,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left 0.12s ease,top 0.12s ease;}
+    .ticker-wrap{background:var(--red);overflow:hidden;white-space:nowrap;padding:0.45rem 0;z-index:200;position:relative;}
+    .ticker-inner{display:inline-block;animation:ticker 35s linear infinite;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:2px;color:#000;font-weight:700;}
+    @keyframes ticker{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+    header{position:sticky;top:0;z-index:500;background:rgba(6,6,7,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between;padding:0.8rem 2.5rem;gap:1rem;}
+    .logo{font-family:var(--font-head);font-size:1.35rem;font-weight:900;color:var(--red);letter-spacing:5px;text-shadow:0 0 20px var(--red-glow);flex-shrink:0;text-decoration:none;}
+    .logo em{color:var(--text);font-style:normal;}
+    nav{display:flex;gap:0.2rem;flex-wrap:wrap;}
+    nav a{font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);text-decoration:none;padding:0.38rem 0.85rem;border:1px solid transparent;border-radius:3px;letter-spacing:1.8px;text-transform:uppercase;transition:all 0.22s;}
+    nav a:hover,nav a.active{color:var(--red);border-color:var(--border);background:var(--red-faint);}
+    .hdr-right{text-align:right;flex-shrink:0;}
+    #hdr-clock{font-family:var(--font-mono);font-size:0.9rem;color:var(--teal);text-shadow:0 0 10px rgba(0,229,204,0.4);}
+    #hdr-date{font-family:var(--font-mono);font-size:0.6rem;color:var(--text-dim);margin-top:2px;}
+    .hero{min-height:91vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 2rem;position:relative;overflow:hidden;}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,17,34,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,17,34,0.055) 1px,transparent 1px);background-size:65px 65px;animation:gridMove 18s linear infinite;}
+    @keyframes gridMove{to{background-position:65px 65px;}}
+    .hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(255,17,34,0.11) 0%,transparent 68%);border-radius:50%;animation:heroGlow 5s ease-in-out infinite;}
+    @keyframes heroGlow{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.2);opacity:1}}
+    .hero-slash{position:absolute;inset:0;pointer-events:none;background:linear-gradient(108deg,transparent 48%,rgba(255,17,34,0.04) 48%,rgba(255,17,34,0.04) 52%,transparent 52%);}
+    .hero-eyebrow{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:5px;color:var(--red);text-transform:uppercase;border:1px solid var(--border);padding:0.3rem 1.3rem;border-radius:2px;margin-bottom:1.8rem;position:relative;z-index:2;animation:fadeUp 0.5s ease both;}
+    .hero h1{font-family:var(--font-head);font-size:clamp(2.8rem,8vw,5.5rem);font-weight:900;line-height:1.02;letter-spacing:2px;position:relative;z-index:2;animation:fadeUp 0.55s ease 0.08s both;}
+    .hero h1 .r{color:var(--red);text-shadow:0 0 35px var(--red-glow);}
+    .hero-sub{font-size:1.1rem;color:var(--text-dim);font-weight:500;max-width:560px;margin:1.3rem 0 2.8rem;position:relative;z-index:2;animation:fadeUp 0.55s ease 0.16s both;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;animation:fadeUp 0.55s ease 0.24s both;}
+    .btn{font-family:var(--font-mono);font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;padding:0.9rem 2.2rem;text-decoration:none;border-radius:3px;transition:all 0.28s;position:relative;overflow:hidden;}
+    .btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.08);transform:translateX(-101%);transition:transform 0.28s;}
+    .btn:hover::after{transform:translateX(0);}
+    .btn-primary{background:var(--red);color:#000;font-weight:700;box-shadow:0 0 28px var(--red-glow);}
+    .btn-primary:hover{box-shadow:0 0 55px var(--red),0 0 90px var(--red-glow);transform:translateY(-3px);}
+    .btn-ghost{background:transparent;color:var(--red);border:1px solid var(--red);}
+    .btn-ghost:hover{background:var(--red-faint);box-shadow:0 0 22px var(--red-glow);transform:translateY(-3px);}
+    .section{padding:5rem 2.5rem;max-width:1160px;margin:0 auto;}
+    .sec-hdr{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.8rem;}
+    .sec-hdr h2{font-family:var(--font-head);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;color:var(--red);text-shadow:0 0 22px var(--red-glow);letter-spacing:2px;white-space:nowrap;}
+    .sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--red-dim),transparent);}
+    .sec-tag{font-family:var(--font-mono);font-size:0.6rem;color:var(--text-dim);letter-spacing:2px;flex-shrink:0;}
+    .mode-tabs{display:flex;justify-content:center;gap:1rem;padding:2rem;flex-wrap:wrap;border-bottom:1px solid var(--border);}
+    .mode-tab{font-family:var(--font-mono);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;padding:0.75rem 2rem;border:1px solid var(--border);border-radius:4px;background:transparent;cursor:pointer;color:var(--text-dim);transition:all 0.25s;text-decoration:none;display:inline-block;}
+    .mode-tab[data-mode="hp"]:hover,.mode-tab[data-mode="hp"].active{color:var(--hp-color);border-color:var(--hp-color);background:rgba(255,17,34,0.07);box-shadow:0 0 18px var(--hp-glow);}
+    .mode-tab[data-mode="ol"]:hover,.mode-tab[data-mode="ol"].active{color:var(--ol-color);border-color:var(--ol-color);background:rgba(255,200,64,0.07);box-shadow:0 0 18px var(--ol-glow);}
+    .mode-tab[data-mode="sd"]:hover,.mode-tab[data-mode="sd"].active{color:var(--sd-color);border-color:var(--sd-color);background:rgba(0,229,204,0.07);box-shadow:0 0 18px var(--sd-glow);}
+    .mode-tab.active{font-weight:700;}
+    .mode-section{display:none;} .mode-section.visible{display:block;}
+    .mode-header{margin-bottom:2.5rem;}
+    .mode-title-row{display:flex;align-items:center;gap:1.5rem;margin-bottom:1rem;}
+    .mode-label{font-family:var(--font-head);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:900;letter-spacing:3px;}
+    .mode-label.hp{color:var(--hp-color);text-shadow:0 0 25px var(--hp-glow);}
+    .mode-label.ol{color:var(--ol-color);text-shadow:0 0 25px var(--ol-glow);}
+    .mode-label.sd{color:var(--sd-color);text-shadow:0 0 25px var(--sd-glow);}
+    .mode-divider{flex:1;height:1px;}
+    .mode-divider.hp{background:linear-gradient(90deg,var(--hp-color),transparent);}
+    .mode-divider.ol{background:linear-gradient(90deg,var(--ol-color),transparent);}
+    .mode-divider.sd{background:linear-gradient(90deg,var(--sd-color),transparent);}
+    .mode-desc{font-size:1rem;color:var(--text-dim);font-weight:500;max-width:750px;line-height:1.6;}
+    .mode-badge{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:2px;padding:0.28rem 0.8rem;border-radius:2px;text-transform:uppercase;flex-shrink:0;}
+    .badge-hp{background:rgba(255,17,34,0.12);color:var(--hp-color);border:1px solid rgba(255,17,34,0.3);}
+    .badge-ol{background:rgba(255,200,64,0.12);color:var(--ol-color);border:1px solid rgba(255,200,64,0.3);}
+    .badge-sd{background:rgba(0,229,204,0.12);color:var(--sd-color);border:1px solid rgba(0,229,204,0.3);}
+    .maps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.8rem;}
+    .map-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.3s;}
+    .map-card:hover{border-color:var(--red);transform:translateY(-5px);box-shadow:0 12px 40px rgba(255,17,34,0.16);}
+    .map-img-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:zoom-in;background:var(--bg2);}
+    .map-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s,filter 0.4s;filter:saturate(0.65) brightness(0.8);}
+    .map-card:hover .map-img-wrap img{transform:scale(1.06);filter:saturate(1) brightness(0.95);}
+    .map-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,7,0.9) 0%,transparent 55%);pointer-events:none;}
+    .map-status{position:absolute;top:0.7rem;right:0.7rem;}
+    .status-live{width:8px;height:8px;border-radius:50%;background:#00ff88;box-shadow:0 0 10px #00ff88;animation:blink 1.5s infinite;}
+    .status-next{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px rgba(255,200,64,0.6);}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+    .map-img-name{position:absolute;bottom:0.7rem;left:0.9rem;font-family:var(--font-head);font-size:0.75rem;font-weight:700;letter-spacing:1.5px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.8);}
+    .zoom-hint{position:absolute;bottom:0.7rem;right:0.7rem;font-family:var(--font-mono);font-size:0.58rem;color:rgba(255,255,255,0.35);letter-spacing:1px;}
+    .map-body{padding:1.2rem;}
+    .map-name{font-family:var(--font-head);font-size:0.92rem;font-weight:700;letter-spacing:1px;margin-bottom:0.5rem;color:var(--text);}
+    .map-tip{font-size:0.85rem;color:var(--text-dim);line-height:1.5;font-weight:500;}
+    .map-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;}
+    .map-tag{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:1.5px;padding:0.2rem 0.55rem;border-radius:2px;text-transform:uppercase;}
+    .tag-hp{background:rgba(255,17,34,0.12);color:var(--hp-color);border:1px solid rgba(255,17,34,0.25);}
+    .tag-ol{background:rgba(255,200,64,0.1);color:var(--ol-color);border:1px solid rgba(255,200,64,0.25);}
+    .tag-sd{background:rgba(0,229,204,0.1);color:var(--sd-color);border:1px solid rgba(0,229,204,0.25);}
+    .strategy-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:6px;padding:1.5rem 1.5rem 1.5rem 1.8rem;margin-top:2rem;}
+    .strategy-box.ol{border-left-color:var(--gold);}
+    .strategy-box.sd{border-left-color:var(--teal);}
+    .strat-title{font-family:var(--font-head);font-size:0.75rem;letter-spacing:2px;margin-bottom:0.8rem;}
+    .strat-title.hp{color:var(--red);}
+    .strat-title.ol{color:var(--gold);}
+    .strat-title.sd{color:var(--teal);}
+    .strat-list{list-style:none;}
+    .strat-list li{font-size:0.85rem;color:var(--text-dim);line-height:1.6;margin-bottom:0.6rem;position:relative;padding-left:1.5rem;}
+    .strat-list li::before{content:'//';position:absolute;left:0;color:var(--red);font-family:var(--font-mono);}
+    .strat-list.hp li::before{color:var(--hp-color);}
+    .strat-list.ol li::before{color:var(--ol-color);}
+    .strat-list.sd li::before{color:var(--sd-color);}
+    .bg-alt{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+    .foot-logo{font-family:var(--font-head);font-size:1rem;font-weight:900;color:var(--red);letter-spacing:5px;margin-bottom:0.7rem;}
+    footer p{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim);letter-spacing:1.5px;}
+    footer a{color:var(--red);text-decoration:none;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.58s ease,transform 0.58s ease;}
+    .reveal.vis{opacity:1;transform:translateY(0);}
+    @media(max-width:900px){header{flex-direction:column;text-align:center;gap:0.6rem;padding:0.8rem 1rem;}.section{padding:3rem 1.2rem;}.maps-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -35,31 +153,110 @@
   </div>
 </header>
 
-<div class="page-hero">
-  <div class="page-hero-grid"></div>
-  <div class="page-hero-glow"></div>
-  <div class="page-tag">// CDL RANKED POOL · SEASON 2 · FEB 2026</div>
-  <h1 class="page-title">MAPS <span class="r">& MODES</span></h1>
-  <p class="page-sub">Full ranked map pool · Hardpoint, Overload, Search & Destroy · Pro breakdowns</p>
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-eyebrow">// BO7 SEASON 2 RANKED · FEB 2026</div>
+  <h1>MAPS <span class="r">& MODES</span></h1>
+  <p class="hero-sub">Full ranked map pool · Hardpoint, Overload, Search & Destroy · Pro tips & breakdowns</p>
+  <div class="hero-btns">
+    <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+  </div>
 </div>
 
-<div class="section">
-  <div class="sec-hdr reveal">
-    <h2>MAP POOL</h2>
-    <div class="sec-line"></div>
-    <span class="sec-tag">// CURRENT SEASON</span>
-  </div>
+<div class="mode-tabs">
+  <a class="mode-tab active" data-mode="hp">Hardpoint</a>
+  <a class="mode-tab" data-mode="ol">Overload</a>
+  <a class="mode-tab" data-mode="sd">Search & Destroy</a>
+</div>
 
-  <!-- Your maps grid or mode tabs here – style now matches index cards -->
-  <div class="maps-strip">  <!-- or use your original .maps-grid if preferred -->
-    <div class="map-chip reveal"><div class="map-dot dot-live"></div><span class="map-emoji">🏚️</span><div class="map-name">BLACKHEART</div><div class="map-mode-lbl">Hardpoint · Live</div></div>
-    <div class="map-chip reveal"><div class="map-dot dot-next"></div><span class="map-emoji">🗿</span><div class="map-name">COLOSSUS</div><div class="map-mode-lbl">S&D · Next</div></div>
-    <!-- Add the rest of your map chips or full mode sections here -->
-  </div>
+<div class="mode-section visible" id="sec-hp">
+  <div class="section">
+    <div class="mode-header reveal">
+      <div class="mode-title-row">
+        <div class="mode-label hp">HARDPOINT</div>
+        <div class="mode-badge badge-hp">4 Maps</div>
+        <div class="mode-divider hp"></div>
+      </div>
+      <p class="mode-desc">Control the rotating hill. Spawn flips and rotations win games. Fast respawn mode where movement and team play shine.</p>
+    </div>
 
-  <div style="text-align:center;margin-top:3rem;">
-    <a href="index.html" class="btn btn-ghost reveal">← Back to Home</a>
+    <div class="maps-grid">
+      <div class="map-card reveal">
+        <div class="map-img-wrap" data-src="blackheart.jpg" data-label="Blackheart — HP">
+          <img src="blackheart.jpg" alt="Blackheart" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0a0e0a,#050e05)';this.parentElement.insertAdjacentHTML('beforeend','<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1rem;letter-spacing:3px;color:var(--red-dim)\'>BLACKHEART</div>');">
+          <div class="map-img-overlay"></div>
+          <div class="map-img-name">BLACKHEART</div>
+          <div class="zoom-hint">ENLARGE</div>
+        </div>
+        <div class="map-body">
+          <p class="map-tip">Live Hardpoint map. Strong for AR anchors holding mid-street. Flanks are key – use smoke for hill pushes.</p>
+          <div class="map-tags"><span class="map-tag tag-hp">HP</span></div>
+        </div>
+      </div>
+
+      <div class="map-card reveal">
+        <div class="map-img-wrap" data-src="den.jpg" data-label="Den — HP">
+          <img src="den.jpg" alt="Den" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0a080e,#0a050a)';this.parentElement.insertAdjacentHTML('beforeend','<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1rem;letter-spacing:3px;color:var(--red-dim)\'>DEN</div>');">
+          <div class="map-img-overlay"></div>
+          <div class="map-img-name">DEN</div>
+          <div class="zoom-hint">ENLARGE</div>
+        </div>
+        <div class="map-body">
+          <p class="map-tip">Close-range chaos. SMGs dominate hill control. Watch for fast flips in central corridor.</p>
+          <div class="map-tags"><span class="map-tag tag-hp">HP</span></div>
+        </div>
+      </div>
+
+      <!-- Add Exposure, Scar similarly with your images -->
+
+      <div class="map-card reveal">
+        <div class="map-img-wrap" data-src="exposure.jpg" data-label="Exposure — HP">
+          <img src="exposure.jpg" alt="Exposure" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0e0a05,#0a0a0a)';this.parentElement.insertAdjacentHTML('beforeend','<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1rem;letter-spacing:3px;color:var(--red-dim)\'>EXPOSURE</div>');">
+          <div class="map-img-overlay"></div>
+          <div class="map-img-name">EXPOSURE</div>
+          <div class="zoom-hint">ENLARGE</div>
+        </div>
+        <div class="map-body">
+          <p class="map-tip">Height advantage wins hills. Vantage SR covers long sightlines. Coordinate team pushes.</p>
+          <div class="map-tags"><span class="map-tag tag-hp">HP</span></div>
+        </div>
+      </div>
+
+      <div class="map-card reveal">
+        <div class="map-img-wrap" data-src="scar.jpg" data-label="Scar — HP">
+          <img src="scar.jpg" alt="Scar" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0a0e0e,#050a0a)';this.parentElement.insertAdjacentHTML('beforeend','<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1rem;letter-spacing:3px;color:var(--red-dim)\'>SCAR</div>');">
+          <div class="map-img-overlay"></div>
+          <div class="map-img-name">SCAR</div>
+          <div class="zoom-hint">ENLARGE</div>
+        </div>
+        <div class="map-body">
+          <p class="map-tip">Balanced layout. Mid rotations crucial. AR/SMG hybrid classes excel here.</p>
+          <div class="map-tags"><span class="map-tag tag-hp">HP</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="strategy-box hp reveal">
+      <div class="strat-title hp">// HARDPOINT WIN CONDITIONS</div>
+      <ul class="strat-list hp">
+        <li>Control spawn flips – push enemy spawns early to trap them.</li>
+        <li>Use utility (smoke/trophies) to hold hills – don't raw push.</li>
+        <li>Rotate 20-30 seconds early – late rotations lose games.</li>
+        <li>On Den: SMGs for close hill fights, ARs hold flanks.</li>
+      </ul>
+    </div>
   </div>
+</div>
+
+<!-- Add OL and SD sections similarly with your content -->
+
+<div id="imgModal">
+  <span class="modal-close" id="modalClose">×</span>
+  <img id="modalImg" src="" alt="">
+  <div class="modal-caption" id="modalCap"></div>
 </div>
 
 <div id="toast">✔ COPIED</div>
@@ -71,7 +268,6 @@
 </footer>
 
 <script>
-  /* Exact same script as index.html */
   const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
   document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';});
   function tick(){const n=new Date();document.getElementById('hdr-clock').textContent=n.toLocaleTimeString('en-GB');document.getElementById('hdr-date').textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});}
@@ -79,7 +275,31 @@
   const revObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(!e.isIntersecting)return;setTimeout(()=>e.target.classList.add('vis'),i*80);revObs.unobserve(e.target);});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
   const toast=document.getElementById('toast');let tt;
-  // Add copy logic if you have copy buttons on this page
+  // Mode tabs
+  document.querySelectorAll('.mode-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.mode-section').forEach(s=>s.classList.remove('visible'));
+      tab.classList.add('active');
+      document.getElementById('sec-'+tab.dataset.mode).classList.add('visible');
+      // Trigger reveals
+      document.querySelectorAll('#sec-'+tab.dataset.mode+' .reveal').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('vis'),i*80);
+      });
+    });
+  });
+  // Image modal
+  const modal=document.getElementById('imgModal'),modalImg=document.getElementById('modalImg'),modalCap=document.getElementById('modalCap');
+  document.querySelectorAll('.map-img-wrap').forEach(wrap=>{
+    wrap.addEventListener('click',()=>{
+      const img=wrap.querySelector('img');
+      const src=img&&img.style.display!=='none'?img.src:null;
+      if(src){modalImg.src=src;modalCap.textContent=wrap.dataset.label||'';modal.classList.add('open');}
+    });
+  });
+  document.getElementById('modalClose').onclick=()=>modal.classList.remove('open');
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open');});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open');});
 </script>
 </body>
 </html>
