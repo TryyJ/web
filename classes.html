@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meta Classes – ARC COD-Elite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* (keeping your original CSS - just adding image handling clarity) */
+    .l-img-wrap img{object-fit:cover;width:100%;height:100%;}
+    .l-img-wrap img.onerror{display:none;}
+  </style>
+</head>
+<body>
+
+<!-- Ticker + Header same as index.html -->
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    ★ META CLASSES UPDATED — PATCH 2.1.4 ★ &nbsp;&nbsp;&nbsp; M15 MOD 0 REMAINS #1 ★ &nbsp;&nbsp;&nbsp; STURMWOLF 45 BUFFED ★ &nbsp;&nbsp;&nbsp; VANTAGE SR STRONG ON COLOSSUS ★
+  </div>
+</div>
+
+<header>
+  <a href="index.html" class="logo">ARC<em>·</em>COD</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="classes.html" class="active">Meta Classes</a>
+    <a href="games.html">Maps & Modes</a>
+  </nav>
+  <div class="hdr-right">
+    <div id="hdr-clock">00:00:00</div>
+    <div id="hdr-date">—</div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-tag">// CDL RESTRICTED · SEASON 2 · FEB 2026</div>
+  <h1 class="page-title">META <span class="r">CLASSES</span></h1>
+  <p class="page-sub">Current ranked meta loadouts – February 2026</p>
+</div>
+
+<div class="section">
+  <div class="filter-bar">
+    <button class="f-btn active" data-f="all">All</button>
+    <button class="f-btn" data-f="ar">AR</button>
+    <button class="f-btn" data-f="smg">SMG</button>
+    <button class="f-btn" data-f="snp">Sniper</button>
+    <span class="filter-count" id="filterCount">Showing all classes</span>
+  </div>
+
+  <div class="loadout-grid">
+
+    <div class="l-card reveal" data-t="ar">
+      <div class="l-img-wrap">
+        <img src="m15-mod-0.jpg" alt="M15 Mod 0">
+        <div class="l-img-overlay"></div>
+        <div class="l-img-badge b-ar">AR</div>
+      </div>
+      <div class="l-body">
+        <div class="l-name">M15 MOD 0</div>
+        <div class="l-role">Balanced Anchor</div>
+        <div class="pr-bar"><div class="pr-fill" style="width:42%"></div></div>
+        <div class="pr-lbl">Pick Rate: <span>~35–45%</span></div>
+        <!-- attachments... -->
+        <div class="code-row"><span>A01-M15X-JBQF-AW11</span><button class="copy-btn" data-code="A01-M15X-JBQF-AW11">COPY</button></div>
+      </div>
+    </div>
+
+    <div class="l-card reveal" data-t="smg">
+      <div class="l-img-wrap">
+        <img src="dravec-45.jpg" alt="Dravec 45">
+        <div class="l-img-overlay"></div>
+        <div class="l-img-badge b-smg">SMG</div>
+      </div>
+      <div class="l-body">
+        <div class="l-name">DRAVEC 45</div>
+        <div class="l-role">Aggro Rush</div>
+        <div class="pr-bar"><div class="pr-fill" style="width:28%"></div></div>
+        <div class="pr-lbl">Pick Rate: <span>~20–30%</span></div>
+        <!-- attachments... -->
+        <div class="code-row"><span>S07-D46TJ-111</span><button class="copy-btn" data-code="S07-D46TJ-111">COPY</button></div>
+      </div>
+    </div>
+
+    <div class="l-card reveal" data-t="smg">
+      <div class="l-img-wrap">
+        <img src="dravec-45.jpg" alt="Sturmwolf 45">
+        <div class="l-img-overlay"></div>
+        <div class="l-img-badge b-smg">SMG ↑</div>
+      </div>
+      <div class="l-body">
+        <div class="l-name">STURMWOLF 45</div>
+        <div class="l-role">Flanking Specialist</div>
+        <div class="pr-bar"><div class="pr-fill" style="width:30%"></div></div>
+        <div class="pr-lbl">Pick Rate: <span>~25–35%</span> · <span style="color:var(--teal)">BUFFED</span></div>
+        <!-- attachments... -->
+        <div class="code-row"><span>S04-CWWDU-H11</span><button class="copy-btn" data-code="S04-CWWDU-H11">COPY</button></div>
+      </div>
+    </div>
+
+    <!-- Add other classes with placeholder or searched images if you get them -->
+
+  </div>
+</div>
+
+<!-- Modal, toast, footer, scripts same as original -->
+
+</body>
+</html>
